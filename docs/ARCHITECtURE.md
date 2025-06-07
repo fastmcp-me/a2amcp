@@ -3,7 +3,7 @@
 ## Overview
 
 A2AMCP (Agent-to-Agent Model Context Protocol) is a distributed communication system that enables AI agents to coordinate while working on parallel development tasks. It provides persistent state management, conflict prevention, and real-time messaging through a centralized MCP server backed by Redis.
-
+    
 ## System Architecture
 
 ```
