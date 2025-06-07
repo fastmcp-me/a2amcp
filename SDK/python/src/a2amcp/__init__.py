@@ -6,7 +6,7 @@ High-level abstractions for Agent-to-Agent communication via Model Context Proto
 
 __version__ = "0.1.0"
 
-from .client import (
+from .core import (
     # Core client
     A2AMCPClient,
     Project,

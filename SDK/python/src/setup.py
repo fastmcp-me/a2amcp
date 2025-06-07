@@ -18,7 +18,6 @@ setup(
     description="Python SDK for A2AMCP - Agent-to-Agent communication via Model Context Protocol",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    license="MIT",  # Add license here
     url="https://github.com/webdevtodayjason/A2AMCP",
     project_urls={
         "Bug Tracker": "https://github.com/webdevtodayjason/A2AMCP/issues",
@@ -34,7 +33,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Software Development :: Build Tools",
         "Topic :: System :: Distributed Computing",
-        # Removed the License classifier since we're using the license field
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",

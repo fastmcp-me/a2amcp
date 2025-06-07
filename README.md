@@ -113,7 +113,7 @@ services:
 
 ### Python SDK
 ```bash
-pip install a2amcp
+pip install a2amcp-sdk
 ```
 
 ### JavaScript/TypeScript SDK (Coming Soon)
