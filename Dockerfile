@@ -13,7 +13,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY mcp_server_redis.py .
+COPY mcp-server-redis.py .
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
