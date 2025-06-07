@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    container_name: splitmind-mcp-server
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=INFO
+      - HEARTBEAT_TIMEOUT=120
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('localhost', 5000), timeout=1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - splitmind-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: splitmind-redis
+    ports:
+      - "6379:6379"  # Expose for debugging, remove in production
+    volumes:
+      - redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - splitmind-network
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: splitmind-redis-ui
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - splitmind-network
+    profiles:
+      - debug  # Only run when explicitly requested
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  splitmind-network:
+    driver: bridge
