@@ -54,8 +54,7 @@ services:
       - redis
     networks:
       - splitmind-network
-    profiles:
-      - debug  # Only run when explicitly requested
+    restart: unless-stopped
 
 volumes:
   redis-data:
