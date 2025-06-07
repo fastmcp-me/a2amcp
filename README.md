@@ -162,10 +162,10 @@ register_interface("my-project", "task-001", "User", "interface User {...}")
 
 ## 📚 Documentation
 
-- [Full API Reference](./docs/API_REFERENCE.md)
-- [Python SDK Documentation](./sdk/python/README.md)
-- [Architecture Overview](./docs/ARCHITECTURE.md)
-- [SplitMind Integration Guide](./docs/SPLITMIND_INTEGRATION.md)
+- [Full API Reference](https://github.com/webdevtodayjason/A2AMCP/blob/main/docs/API_REFERENCE.md)
+- [Python SDK Documentation](https://github.com/webdevtodayjason/A2AMCP/blob/main/sdk/python/README.md)
+- [Architecture Overview](https://github.com/webdevtodayjason/A2AMCP/blob/main/docs/ARCHITECTURE.md)
+- [SplitMind Integration Guide](https://github.com/webdevtodayjason/A2AMCP/blob/main/docs/SPLITMIND_INTEGRATION.md)
 
 ## 🛠️ SDKs and Tools
 
@@ -179,7 +179,7 @@ register_interface("my-project", "task-001", "User", "interface User {...}")
 - **Go SDK**: High-performance orchestration
 - **Testing Framework**: Mock servers and test utilities
 
-See [SDK Development Progress](./sdk/TODO.md) for details.
+See [SDK Development Progress](https://github.com/webdevtodayjason/A2AMCP/blob/main/sdk/TODO.md) for details.
 
 ## 🤝 Integration with AI Frameworks
 
@@ -213,7 +213,7 @@ While inspired by Google's A2A protocol, A2AMCP makes specific design choices fo
 
 ## 🤝 Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/webdevtodayjason/A2AMCP/blob/main/CONTRIBUTING.md) for guidelines.
 
 ### Development Setup
 ```bash
@@ -247,7 +247,7 @@ docker-compose -f docker-compose.dev.yml up
 
 ## 📄 License
 
-MIT License - see [LICENSE](./LICENSE) file.
+MIT License - see [LICENSE](https://github.com/webdevtodayjason/A2AMCP/blob/main/LICENSE) file.
 
 ## 🙏 Acknowledgments
 
