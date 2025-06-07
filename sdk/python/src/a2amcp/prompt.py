@@ -5,7 +5,7 @@ Generates optimal prompts for AI agents with MCP instructions.
 """
 
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from textwrap import dedent
 
 
