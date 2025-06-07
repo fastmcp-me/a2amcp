@@ -4,7 +4,7 @@ A2AMCP Python SDK
 High-level abstractions for Agent-to-Agent communication via Model Context Protocol.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.3"
 
 from .core import (
     # Core client

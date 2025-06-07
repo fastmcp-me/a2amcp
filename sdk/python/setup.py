@@ -12,7 +12,7 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="a2amcp-sdk",
-    version="0.1.0",
+    version="0.1.3",
     author="Jason",
     author_email="",  # Add your email if you want
     description="Python SDK for A2AMCP - Agent-to-Agent communication via Model Context Protocol",
