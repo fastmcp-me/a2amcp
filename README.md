@@ -3,12 +3,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-Powered-red.svg)](https://redis.io/)
+[![Status](https://img.shields.io/badge/Status-Running%20%E2%9C%85-green.svg)](https://github.com/webdevtodayjason/A2AMCP)
 
 ## Enabling Seamless Multi-Agent Collaboration for AI-Powered Development
 
 A2AMCP brings Google's Agent-to-Agent (A2A) communication concepts to the Model Context Protocol (MCP) ecosystem, enabling AI agents to communicate, coordinate, and collaborate in real-time while working on parallel development tasks.
 
 Originally created for [SplitMind](https://github.com/webdevtodayjason/splitmind), A2AMCP solves the critical problem of isolated AI agents working on the same codebase without awareness of each other's changes.
+
+**✅ Server Status: Running and tested! Ready for Claude Desktop/Code integration.**
 
 ## 🚀 Quick Start
 
@@ -28,14 +31,26 @@ docker ps | grep a2amcp-server
 
 ### Configure Your Agents
 
-Add to your Claude Code or MCP-compatible agent configuration:
+#### Claude Code (CLI)
+```bash
+# Add the MCP server using Claude Code CLI
+claude mcp add splitmind-a2amcp \
+  -e REDIS_URL=redis://localhost:6379 \
+  -- docker exec -i splitmind-mcp-server python /app/mcp-server-redis.py
+```
+
+#### Claude Desktop
+Add to your configuration file (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
 ```json
 {
   "mcpServers": {
-    "a2amcp": {
+    "splitmind-a2amcp": {
       "command": "docker",
-      "args": ["exec", "-i", "a2amcp-server", "python", "/app/mcp_server_redis.py"]
+      "args": ["exec", "-i", "splitmind-mcp-server", "python", "/app/mcp-server-redis.py"],
+      "env": {
+        "REDIS_URL": "redis://redis:6379"
+      }
     }
   }
 }
@@ -46,6 +61,15 @@ Add to your Claude Code or MCP-compatible agent configuration:
 When multiple AI agents work on the same codebase:
 - **Without A2AMCP**: Agents create conflicting code, duplicate efforts, and cause merge conflicts
 - **With A2AMCP**: Agents coordinate, share interfaces, prevent conflicts, and work as a team
+
+### Generic Use Cases Beyond SplitMind
+
+A2AMCP can coordinate any multi-agent scenario:
+- **Microservices**: Different agents building separate services
+- **Full-Stack Apps**: Frontend and backend agents collaborating
+- **Documentation**: Multiple agents creating interconnected docs
+- **Testing**: Test writers coordinating with feature developers
+- **Refactoring**: Agents working on different modules simultaneously
 
 ## 🏗️ Architecture
 
@@ -94,21 +118,36 @@ When multiple AI agents work on the same codebase:
 
 ### Docker Compose (Production)
 ```yaml
-version: '3.8'
 services:
-  a2amcp-server:
-    image: a2amcp/server:latest
+  mcp-server:
+    build: .
+    container_name: splitmind-mcp-server
     ports:
-      - "5000:5000"
+      - "5050:5000"  # Changed from 5000 to avoid conflicts
     environment:
       - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=INFO
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
   
   redis:
     image: redis:7-alpine
+    container_name: splitmind-redis
+    ports:
+      - "6379:6379"
     volumes:
       - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  redis-data:
+    driver: local
 ```
 
 ### Python SDK
@@ -162,6 +201,8 @@ register_interface("my-project", "task-001", "User", "interface User {...}")
 
 ## 📚 Documentation
 
+- [Claude Code Setup Guide](./CLAUDE_CODE_SETUP.md)
+- [Installation & Setup](./SETUP.md)
 - [Full API Reference](https://github.com/webdevtodayjason/A2AMCP/blob/main/docs/API_REFERENCE.md)
 - [Python SDK Documentation](https://github.com/webdevtodayjason/A2AMCP/blob/main/sdk/python/README.md)
 - [Architecture Overview](https://github.com/webdevtodayjason/A2AMCP/blob/main/docs/ARCHITECTURE.md)

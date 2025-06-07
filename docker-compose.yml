@@ -5,7 +5,7 @@ services:
     build: .
     container_name: splitmind-mcp-server
     ports:
-      - "5000:5000"
+      - "5050:5000"
     environment:
       - REDIS_URL=redis://redis:6379
       - LOG_LEVEL=INFO

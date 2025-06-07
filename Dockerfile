@@ -26,7 +26,7 @@ ENV LOG_LEVEL=INFO
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import socket; socket.create_connection(('localhost', 5000), timeout=1)"
+    CMD python -c "import socket; socket.create_connection(('localhost', 5009), timeout=1)"
 
 # Run the MCP server
 ENTRYPOINT ["/app/entrypoint.sh"]

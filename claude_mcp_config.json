@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "splitmind-a2amcp": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "splitmind-mcp-server",
+        "python",
+        "/app/mcp-server-redis.py"
+      ],
+      "env": {
+        "REDIS_URL": "redis://redis:6379"
+      }
+    }
+  }
+}

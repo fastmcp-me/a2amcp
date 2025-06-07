@@ -245,3 +245,6 @@ sdk/python/htmlcov/
 test-results/
 test-reports/
 *.test.log
+
+# Test environment
+test_env/

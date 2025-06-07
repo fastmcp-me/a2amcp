@@ -14,5 +14,10 @@ done
 
 echo "Redis is ready!"
 
-# Run the MCP server
-exec python mcp_server_redis.py
+# For MCP servers that communicate via STDIO, we need to keep the container running
+# The actual MCP server will be invoked by Claude when needed
+echo "MCP Server is ready and waiting for STDIO connections..."
+echo "Connect via Claude Desktop or Claude Code MCP configuration"
+
+# Keep the container running
+tail -f /dev/null

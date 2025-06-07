@@ -1,4 +1,5 @@
 # MCP Agent Communication Server Requirements
+a2amcp-sdk
 mcp>=0.1.0
 redis[hiredis]>=5.0.0
 asyncio
