@@ -108,6 +108,7 @@ A2AMCP can coordinate any multi-agent scenario:
 - Todo list management
 - Progress visibility
 - Completion tracking
+- Task completion signaling
 
 ### 5. **Multi-Project Support**
 - Isolated project namespaces

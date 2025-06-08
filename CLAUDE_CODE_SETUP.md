@@ -86,6 +86,8 @@ Once installed, you can use A2AMCP tools in your prompts:
 @splitmind-a2amcp get_active_agents project_id="my-project"
 
 @splitmind-a2amcp send_message project_id="my-project" from_session="frontend-agent" to_session="backend-agent" message="What's the user API endpoint?"
+
+@splitmind-a2amcp mark_task_completed project_id="my-project" session_name="frontend-agent" task_id="TASK-001"
 ```
 
 ## Environment Variables

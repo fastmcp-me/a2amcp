@@ -72,6 +72,9 @@ Add the following to your Claude Desktop MCP configuration file:
 - **release_file** - Release file lock
 - **check_file_conflicts** - Check for file conflicts
 
+### Task Completion
+- **mark_task_completed** - Signal task completion to orchestrator
+
 ## Testing
 
 Run the test script to verify all endpoints:

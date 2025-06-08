@@ -128,6 +128,31 @@ Lists all active agents in the project.
 
 ---
 
+### `mark_task_completed`
+
+Marks a task as completed and signals the orchestrator.
+
+**Parameters:**
+- `project_id` (str): Project identifier
+- `session_name` (str): Agent's session name
+- `task_id` (str): Task identifier that was completed
+
+**Returns:**
+```json
+{
+  "status": "success",
+  "message": "Task TASK-123 marked as completed"
+}
+```
+
+**Effects:**
+- Updates agent status to "completed" in Redis
+- Stores completion record with timestamp
+- Writes "COMPLETED" to `/tmp/splitmind-status/{session_name}.status`
+- Allows orchestrator to detect and handle completion
+
+---
+
 ### `unregister_agent`
 
 Unregisters an agent when task is complete.
@@ -589,7 +614,12 @@ for attempt in range(max_retries):
 - Log errors for debugging
 - Fail gracefully
 
-### 7. Cleanup
+### 7. Task Completion
+- Call `mark_task_completed` when work is done
+- This signals the orchestrator properly
+- Then call `unregister_agent` for cleanup
+
+### 8. Cleanup
 - Always unregister on exit
 - Release all held locks
 - Complete or update todos
