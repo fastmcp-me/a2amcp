@@ -3,6 +3,8 @@
 ## Overview
 The A2AMCP (Agent-to-Agent Model Context Protocol) server enables communication between AI agents working on the SplitMind platform. It uses Redis for state management and communicates via MCP's STDIO protocol.
 
+**Latest Update:** Server now uses modern MCP SDK 1.9.3 with proper `@server.list_tools()` and `@server.call_tool()` decorators, eliminating connection hanging issues.
+
 ## Running the Server
 
 1. **Start the Docker containers:**
@@ -53,27 +55,42 @@ Add the following to your Claude Desktop MCP configuration file:
 
 ## Available MCP Tools
 
+The server implements **16+ A2AMCP API tools** using modern MCP SDK patterns:
+
 ### Agent Management
 - **register_agent** - Register an agent for a project
 - **unregister_agent** - Unregister an agent when done
-- **get_active_agents** - List all active agents
+- **list_active_agents** - List all active agents
 - **heartbeat** - Keep agent alive
 
-### Communication
-- **send_message** - Send message to another agent
-- **get_messages** - Retrieve pending messages
+### Todo Management
+- **add_todo** - Add a todo item
+- **update_todo** - Update todo status
+- **get_my_todos** - Get agent's todos
 
-### Task Management
-- **update_todo_list** - Update agent's todo list
-- **get_todo_list** - Get current todos
+### Communication
+- **query_agent** - Send query to another agent
+- **check_messages** - Check and retrieve messages
+- **respond_to_query** - Respond to a specific query
 
 ### File Coordination
-- **register_file_change** - Lock a file for editing
-- **release_file** - Release file lock
-- **check_file_conflicts** - Check for file conflicts
+- **announce_file_change** - Lock a file before editing
+- **release_file_lock** - Release file lock after editing
+- **get_recent_changes** - Get recent file changes
+
+### Shared Definitions
+- **register_interface** - Share a type/interface definition
+- **query_interface** - Get shared interface definition
+- **list_interfaces** - List all shared interfaces
 
 ### Task Completion
 - **mark_task_completed** - Signal task completion to orchestrator
+
+**Technical Implementation:**
+- Uses `@server.list_tools()` to register available tools
+- Uses `@server.call_tool()` to handle tool execution
+- Proper A2AMCP response format with status, message, and data
+- No connection hanging issues with modern MCP SDK 1.9.3
 
 ## Testing
 

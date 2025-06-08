@@ -11,7 +11,7 @@ A2AMCP brings Google's Agent-to-Agent (A2A) communication concepts to the Model 
 
 Originally created for [SplitMind](https://github.com/webdevtodayjason/splitmind), A2AMCP solves the critical problem of isolated AI agents working on the same codebase without awareness of each other's changes.
 
-**✅ Server Status: Running and tested! Ready for Claude Desktop/Code integration.**
+**✅ Server Status: Fixed and ready! Uses modern MCP SDK 1.9.3 with proper decorators.**
 
 ## 🚀 Quick Start
 
@@ -114,6 +114,12 @@ A2AMCP can coordinate any multi-agent scenario:
 - Isolated project namespaces
 - Redis-backed persistence
 - Automatic cleanup
+
+### 6. **Modern MCP Integration**
+- Uses MCP SDK 1.9.3 with proper decorators
+- `@server.list_tools()` and `@server.call_tool()` patterns
+- No hanging or connection issues
+- Full A2AMCP API compliance
 
 ## 📦 Installation Options
 
@@ -245,8 +251,11 @@ While inspired by Google's A2A protocol, A2AMCP makes specific design choices fo
 ## 🚀 Roadmap
 
 - [x] Core MCP server with Redis
+- [x] Modern MCP SDK 1.9.3 integration
+- [x] Fixed decorator patterns (`@server.list_tools()`, `@server.call_tool()`)
 - [x] Python SDK
 - [x] Docker deployment
+- [x] All 16+ A2AMCP API tools implemented
 - [ ] JavaScript/TypeScript SDK
 - [ ] CLI monitoring tools
 - [ ] SplitMind native integration
