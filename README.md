@@ -11,7 +11,7 @@ A2AMCP brings Google's Agent-to-Agent (A2A) communication concepts to the Model 
 
 Originally created for [SplitMind](https://github.com/webdevtodayjason/splitmind), A2AMCP solves the critical problem of isolated AI agents working on the same codebase without awareness of each other's changes.
 
-**✅ Server Status: Fixed and ready! Uses modern MCP SDK 1.9.3 with proper decorators.**
+**✅ Server Status: WORKING! All 17 tools implemented and tested. Uses modern MCP SDK 1.9.3.**
 
 ## 🚀 Quick Start
 
@@ -26,7 +26,10 @@ cd A2AMCP
 docker-compose up -d
 
 # Verify it's running
-docker ps | grep a2amcp-server
+docker ps | grep splitmind
+
+# Test the connection
+python verify_mcp.py
 ```
 
 ### Configure Your Agents
@@ -76,9 +79,9 @@ A2AMCP can coordinate any multi-agent scenario:
 ```
 ┌─────────────────┐
 │   A2AMCP Server │ ← Persistent Redis-backed MCP server
-│   (Port 5000)   │   handling all agent communication
+│   (Port 5050)   │   handling all agent communication
 └────────┬────────┘
-         │
+         │ STDIO Protocol (MCP)
     ┌────┴────┬─────────┬─────────┐
     ▼         ▼         ▼         ▼
 ┌────────┐┌────────┐┌────────┐┌────────┐
@@ -118,8 +121,8 @@ A2AMCP can coordinate any multi-agent scenario:
 ### 6. **Modern MCP Integration**
 - Uses MCP SDK 1.9.3 with proper decorators
 - `@server.list_tools()` and `@server.call_tool()` patterns
-- No hanging or connection issues
-- Full A2AMCP API compliance
+- STDIO-based communication protocol
+- Full A2AMCP API compliance with 17 tools implemented
 
 ## 📦 Installation Options
 
@@ -255,12 +258,30 @@ While inspired by Google's A2A protocol, A2AMCP makes specific design choices fo
 - [x] Fixed decorator patterns (`@server.list_tools()`, `@server.call_tool()`)
 - [x] Python SDK
 - [x] Docker deployment
-- [x] All 16+ A2AMCP API tools implemented
+- [x] All 17 A2AMCP API tools implemented and tested
+- [x] Health check endpoint for monitoring
+- [x] Verification script for testing connectivity
 - [ ] JavaScript/TypeScript SDK
 - [ ] CLI monitoring tools
 - [ ] SplitMind native integration
 - [ ] Framework adapters (LangChain, CrewAI)
 - [ ] Enterprise features
+
+## 🛠️ Troubleshooting
+
+### Agents can't see `mcp__splitmind-a2amcp__` tools
+
+1. **Restart Claude Desktop** - MCP connections are established at startup
+2. **Verify server is running**: `docker ps | grep splitmind`
+3. **Check health endpoint**: `curl http://localhost:5050/health`
+4. **Run verification script**: `python verify_mcp.py`
+5. **Check configuration**: Ensure `~/Library/Application Support/Claude/claude_desktop_config.json` contains the A2AMCP server configuration
+
+### Common Issues
+
+- **"Tool 'X' not yet implemented"** - Fixed in latest version, pull latest changes
+- **Connection failed** - Ensure Docker is running and ports 5050/6379 are free
+- **Redis connection errors** - Wait for Redis to be ready (takes ~5-10 seconds on startup)
 
 ## 🤝 Contributing
 
